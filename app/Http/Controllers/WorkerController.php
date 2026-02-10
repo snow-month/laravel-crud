@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WorkerStoreRequest;
+use App\Http\Requests\WorkerUpdateRequest;
 use App\Models\Worker;
-use Illuminate\Http\Request;
 
 class WorkerController extends Controller
 {
@@ -27,12 +28,9 @@ class WorkerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): string
+    public function store(WorkerStoreRequest $request): string
     {
-        $data = $request->validate([
-            'name' => 'required|max:255',
-            'surname' => 'required'
-        ]);
+        $data = $request->validated();
 
         Worker::query()->create($data);
 
@@ -59,12 +57,9 @@ class WorkerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Worker $worker): string
+    public function update(WorkerUpdateRequest $request, Worker $worker): string
     {
-        $data = $request->validate([
-            'name' => 'required|max:255',
-            'surname' => 'required'
-        ]);
+        $request->validated();
 
         $worker->update($request->all());
 
