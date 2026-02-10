@@ -5,15 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\WorkerStoreRequest;
 use App\Http\Requests\WorkerUpdateRequest;
 use App\Models\Worker;
+use App\Services\WorkerService;
 
 class WorkerController extends Controller
 {
+    public function __construct(
+        private readonly WorkerService $workerService
+    )
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(): string
     {
-        $workers = Worker::all();
+        $workers = $this->workerService->getAll();
         return view('workers.index', compact('workers'));
     }
 
@@ -32,7 +39,7 @@ class WorkerController extends Controller
     {
         $data = $request->validated();
 
-        Worker::query()->create($data);
+        $this->workerService->create($data);
 
         return redirect()->route('workers.index')
             ->with('success', 'Worker created successfully!');
@@ -61,7 +68,8 @@ class WorkerController extends Controller
     {
         $request->validated();
 
-        $worker->update($request->all());
+        $data = $request->all();
+        $this->workerService->update($worker, $data);
 
         return redirect()->route('workers.index')
             ->with('success', 'Worker updated successfully.');
@@ -72,7 +80,7 @@ class WorkerController extends Controller
      */
     public function destroy(Worker $worker): string
     {
-        $worker->delete();
+        $this->workerService->destroy($worker);
 
         return redirect()->route('workers.index')
             ->with('success', 'Worker deleted successfully.');
