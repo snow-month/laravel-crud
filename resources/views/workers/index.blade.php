@@ -1,4 +1,6 @@
 <a href="{{ route('workers.create') }}">Add worker</a>
+<a href="{{ route('positions.create') }}">Add position</a>
+<a href="{{ route('positions.index') }}">All positions</a>
 
 @if(session('success'))
     <p style="color: red">{{ session('success') }}</p>
