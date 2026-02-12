@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PositionStoreRequest;
+use App\Http\Requests\PositionUpdateRequest;
 use App\Models\Position;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class PositionController extends Controller
 {
@@ -61,13 +61,11 @@ class PositionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Position $position): RedirectResponse
+    public function update(PositionUpdateRequest $request, Position $position): RedirectResponse
     {
-        $data = $request->validate([
-            'title' => 'string|max:255',
-            'salary' => 'integer'
-        ]);
+        $request->validated();
 
+        $data = $request->all();
         $position->update($data);
 
         return redirect()->route('positions.index')
