@@ -5,18 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PositionStoreRequest;
 use App\Http\Requests\PositionUpdateRequest;
 use App\Models\Position;
+use App\Services\PositionService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class PositionController extends Controller
 {
+    public function __construct(
+        private readonly PositionService $positionService
+    )
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(): Factory|View
     {
-        $positions = Position::all();
+        $positions = $this->positionService->getAll();
 
         return view('positions.index', compact('positions'));
     }
@@ -36,7 +43,7 @@ class PositionController extends Controller
     {
         $data = $request->validated();
 
-        Position::query()->create($data);
+        $this->positionService->create($data);
 
         return redirect()->route('positions.index')
             ->with('success', 'Positional created successfully!');
@@ -66,7 +73,7 @@ class PositionController extends Controller
         $request->validated();
 
         $data = $request->all();
-        $position->update($data);
+        $this->positionService->update($position, $data);
 
         return redirect()->route('positions.index')
             ->with('success', 'Position updated successfully.');
@@ -77,7 +84,7 @@ class PositionController extends Controller
      */
     public function destroy(Position $position): RedirectResponse
     {
-        $position->delete();
+        $this->positionService->destroy($position);
 
         return redirect()->route('positions.index')
             ->with('success', 'Position deleted successfully.');
