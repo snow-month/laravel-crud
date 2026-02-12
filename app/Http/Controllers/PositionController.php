@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PositionStoreRequest;
 use App\Models\Position;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -31,12 +32,9 @@ class PositionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(PositionStoreRequest $request): RedirectResponse
     {
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'salary' => 'required|integer'
-        ]);
+        $data = $request->validated();
 
         Position::query()->create($data);
 
