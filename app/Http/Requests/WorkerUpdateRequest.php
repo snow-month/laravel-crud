@@ -23,7 +23,8 @@ class WorkerUpdateRequest extends FormRequest
     {
         return [
             'name' => 'string|max:255',
-            'surname' => 'string|max:255'
+            'surname' => 'string|max:255',
+            'position_id' => 'nullable|integer|exists:positions,id'
         ];
     }
 }
