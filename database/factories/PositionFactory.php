@@ -2,25 +2,25 @@
 
 namespace Database\Factories;
 
-use App\Models\Position;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Random\RandomException;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Worker>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Position>
  */
-class WorkerFactory extends Factory
+class PositionFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
+     * @throws RandomException
      */
     public function definition(): array
     {
         return [
-            'name' => fake()->word(),
-            'surname' => fake()->word(),
-            'position_id' => Position::all()->random()
+            'title' => fake()->word(),
+            'salary' => random_int(60000, 130000),
         ];
     }
 }
