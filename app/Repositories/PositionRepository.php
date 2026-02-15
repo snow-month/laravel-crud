@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Position;
 use Illuminate\Database\Eloquent\Collection;
 
-class PositionRepository
+class PositionRepository implements PositionRepositoryInterface
 {
     public function getAll(): Collection
     {

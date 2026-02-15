@@ -3,13 +3,13 @@
 namespace App\Services;
 
 use App\Models\Position;
-use App\Repositories\PositionRepository;
+use App\Repositories\PositionRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 readonly class PositionService
 {
     public function __construct(
-        private PositionRepository $positionRepository
+        private PositionRepositoryInterface $positionRepository
     )
     {
     }
