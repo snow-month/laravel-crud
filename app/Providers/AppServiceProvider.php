@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\PositionRepository;
 use App\Repositories\PositionRepositoryInterface;
+use App\Services\PositionService;
+use App\Services\PositionServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(PositionRepositoryInterface::class,
             PositionRepository::class);
+        $this->app->bind(PositionServiceInterface::class,
+            PositionService::class);
     }
 
     /**

@@ -6,7 +6,7 @@ use App\Models\Position;
 use App\Repositories\PositionRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
-readonly class PositionService
+readonly class PositionService implements PositionServiceInterface
 {
     public function __construct(
         private PositionRepositoryInterface $positionRepository

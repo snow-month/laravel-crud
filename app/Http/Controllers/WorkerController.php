@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\WorkerStoreRequest;
 use App\Http\Requests\WorkerUpdateRequest;
 use App\Models\Worker;
-use App\Services\PositionService;
+use App\Services\PositionServiceInterface;
 use App\Services\WorkerService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -14,8 +14,8 @@ use Illuminate\Http\RedirectResponse;
 class WorkerController extends Controller
 {
     public function __construct(
-        private readonly WorkerService   $workerService,
-        private readonly PositionService $positionService
+        private readonly WorkerService            $workerService,
+        private readonly PositionServiceInterface $positionService
     )
     {
     }
@@ -76,9 +76,8 @@ class WorkerController extends Controller
      */
     public function update(WorkerUpdateRequest $request, Worker $worker): RedirectResponse
     {
-        $request->validated();
+        $data = $request->validated();
 
-        $data = $request->all();
         $this->workerService->update($worker, $data);
 
         return redirect()->route('workers.index')
