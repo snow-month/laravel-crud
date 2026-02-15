@@ -3,13 +3,13 @@
 namespace App\Services;
 
 use App\Models\Worker;
-use App\Repositories\WorkerRepository;
+use App\Repositories\WorkerRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 readonly class WorkerService
 {
     public function __construct(
-        private WorkerRepository $workerRepository
+        private WorkerRepositoryInterface $workerRepository
     )
     {
     }

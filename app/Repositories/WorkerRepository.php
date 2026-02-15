@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Worker;
 use Illuminate\Database\Eloquent\Collection;
 
-class WorkerRepository
+class WorkerRepository implements WorkerRepositoryInterface
 {
     public function getAll(): Collection
     {
