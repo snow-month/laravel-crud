@@ -6,7 +6,7 @@ use App\Http\Requests\WorkerStoreRequest;
 use App\Http\Requests\WorkerUpdateRequest;
 use App\Models\Worker;
 use App\Services\PositionServiceInterface;
-use App\Services\WorkerService;
+use App\Services\WorkerServiceInterface;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +14,7 @@ use Illuminate\Http\RedirectResponse;
 class WorkerController extends Controller
 {
     public function __construct(
-        private readonly WorkerService            $workerService,
+        private readonly WorkerServiceInterface   $workerService,
         private readonly PositionServiceInterface $positionService
     )
     {

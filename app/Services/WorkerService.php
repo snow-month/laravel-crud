@@ -6,7 +6,7 @@ use App\Models\Worker;
 use App\Repositories\WorkerRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
-readonly class WorkerService
+readonly class WorkerService implements WorkerServiceInterface
 {
     public function __construct(
         private WorkerRepositoryInterface $workerRepository

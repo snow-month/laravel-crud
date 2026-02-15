@@ -8,6 +8,8 @@ use App\Repositories\WorkerRepository;
 use App\Repositories\WorkerRepositoryInterface;
 use App\Services\PositionService;
 use App\Services\PositionServiceInterface;
+use App\Services\WorkerService;
+use App\Services\WorkerServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(WorkerRepositoryInterface::class,
             WorkerRepository::class);
+        $this->app->bind(WorkerServiceInterface::class,
+            WorkerService::class);
     }
 
     /**
